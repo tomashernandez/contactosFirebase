@@ -1,0 +1,7 @@
+<mat-card *ngIf="contact">
+    <mat-card-title> Detalle del contacto</mat-card-title>
+    <mat-card-content>
+        Nombre: {{ contact.nombre }}<br> Apellidos: {{ contact.apellidos }}<br> Empresa: {{ contact.empresa}}<br> Dirección: {{ contact.direccion }}<br> Teléfono: {{ contact.telefono }}<br> Email: {{ contact.nombre }}<br>
+        <button mat-button (click)="onClose()">Cerrar</button>
+    </mat-card-content>
+</mat-card>

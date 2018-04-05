@@ -1,0 +1,26 @@
+<form [formGroup]="form" (ngSubmit)="submit(form)">
+    <h2 mat-dialog-title>{{data.nombre+' '+data.apellidos}}</h2>
+    <mat-dialog-content>
+        <mat-form-field class="col-md-12">
+            <input matInput formControlName="nombre" placeholder="Nombre" value="{{data.nombre}}">
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+            <input matInput formControlName="apellidos" placeholder="Apellidos" value="{{data.apellidos}}">
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+            <input matInput formControlName="empresa" placeholder="Empresa" value="{{data.empresa}}">
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+            <input matInput formControlName="direccion" placeholder="Dirección" value="{{data.direccion}}">
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+            <input matInput formControlName="telefono" placeholder="Teléfono" value="{{data.telefono}}">
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+            <input matInput formControlName="email" placeholder="Email" value="{{data.email}}">
+        </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button type="button" mat-dialog-close color="warn" mat-raised-button class="pull-right">Cerrar</button>
+    </mat-dialog-actions>
+</form>

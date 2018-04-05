@@ -1,0 +1,27 @@
+<mat-card *ngIf="contactOrigin">
+    <mat-card-title>Editar contacto</mat-card-title>
+    <mat-card-content>
+        <form novalidate [formGroup]="formEditar" (ngSumbit)="onGuardar()">
+            <mat-input-container>
+                <input type="text" matInput placeholder="Nombre" formControlName="nombre">
+            </mat-input-container>
+            <mat-input-container>
+                <input matInput formControlName="apellidos" placeholder="Apellidos">
+            </mat-input-container>
+            <mat-input-container>
+                <input matInput formControlName="empresa" placeholder="Empresa">
+            </mat-input-container>
+            <mat-input-container>
+                <input matInput formControlName="direccion" placeholder="Dirección">
+            </mat-input-container>
+            <mat-input-container>
+                <input matInput formControlName="telefono" placeholder="Teléfono">
+            </mat-input-container>
+            <mat-input-container>
+                <input matInput formControlName="email" placeholder="Email">
+            </mat-input-container>
+            <button type="submit" mat-button mat-raised-button color="accent" (click)="onGuardar(contacto)">Guardar</button>
+            <button type="button" mat-button mat-raised-button color="warn" (click)="onCancelar()">Cancelar</button>
+        </form>
+    </mat-card-content>
+</mat-card>
