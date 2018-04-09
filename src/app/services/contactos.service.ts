@@ -21,8 +21,8 @@ export class ContactosService {
   constructor(private afDb:AngularFireDatabase) {}
 
   getContacts(){
-    this.contacts=this.afDb.list('contactos').valueChanges();
-    return this.contacts;
+    this.contactsRef=this.afDb.list('contactos');
+    return this.contactsRef;
   }
 
   getContactFilter(filtro:string){
@@ -59,7 +59,15 @@ export class ContactosService {
   } 
   
   updateContact(key,contact){
-  
     this.contactsRef.update(key,contact);
   }
+
+  removeContact(key){
+    this.contactsRef.remove(key);
+  }
+
+  addContact(contact){
+    this.contactsRef.push(contact);
+  }
+  
 }

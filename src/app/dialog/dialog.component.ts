@@ -20,18 +20,18 @@ export class DialogComponent implements OnInit {
   constructor(
     private formBuilder:FormBuilder,
     private dialogRef:MatDialogRef<DialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private data
+    @Inject(MAT_DIALOG_DATA) public dataDialog
  
   ) { }
 
   ngOnInit() {
     this.form=this.formBuilder.group({
-      nombre: this.data ? this.data.nombre : '',
-      apellidos:this.data ? this.data.apellidos : '',
-      empresa:this.data ? this.data.empresa : '',
-      direccion:this.data ? this.data.direccion : '',
-      telefono:this.data ? this.data.telefono : '',
-      email:this.data ? this.data.email : '',
+      nombre: this.dataDialog ? this.dataDialog.nombre : '',
+      apellidos:this.dataDialog ? this.dataDialog.apellidos : '',
+      empresa:this.dataDialog ? this.dataDialog.empresa : '',
+      direccion:this.dataDialog ? this.dataDialog.direccion : '',
+      telefono:this.dataDialog ? this.dataDialog.telefono : '',
+      email:this.dataDialog ? this.dataDialog.email : '',
     });
   }
 
@@ -40,7 +40,7 @@ export class DialogComponent implements OnInit {
   }
 
   closeModal(){
-    console.log('here')
+    
   }
 
 }

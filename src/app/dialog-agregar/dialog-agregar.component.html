@@ -1,0 +1,32 @@
+<form [formGroup]="formAgregar" (keydown.enter)="$event.preventDefault()" >
+    <h2 mat-dialog-title>Nuevo contacto</h2>
+    <mat-dialog-content>
+        <mat-form-field class="col-md-12">
+            <input matInput formControlName="nombre" placeholder="Nombre" id="nombre">
+            <mat-error *ngIf="formAgregar.hasError('required',['nombre'])">Campo Requerido</mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+            <input matInput formControlName="apellidos" placeholder="*Apellidos" id="apellidos" name="apellidos">
+            <mat-error  *ngIf="formAgregar.hasError('required',['apellidos'])">Campo Requerido</mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+            <input matInput formControlName="empresa" placeholder="Empresa">
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+            <input matInput formControlName="direccion" placeholder="*Dirección">
+            <mat-error  *ngIf="formAgregar.hasError('required',['direccion'])" >Campo Requerido</mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+            <input matInput formControlName="telefono" placeholder="Teléfono">
+
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+            <input matInput formControlName="email" placeholder="Email">
+            <mat-error></mat-error>
+        </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button type="submit" mat-button mat-raised-button color="accent" (click)="onAgregar(formAgregar.value)" [disabled]="!formAgregar.valid">Guardar</button>
+        <button type="button" mat-button mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+    </mat-dialog-actions>
+</form>

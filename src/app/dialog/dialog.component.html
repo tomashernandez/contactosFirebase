@@ -1,23 +1,23 @@
 <form [formGroup]="form" (ngSubmit)="submit(form)">
-    <h2 mat-dialog-title>{{data.nombre+' '+data.apellidos}}</h2>
+    <h2 mat-dialog-title>{{dataDialog.nombre+' '+dataDialog.apellidos}}</h2>
     <mat-dialog-content>
         <mat-form-field class="col-md-12">
-            <input matInput formControlName="nombre" placeholder="Nombre" value="{{data.nombre}}">
+            <input matInput formControlName="nombre" readonly placeholder="Nombre" value="{{dataDialog.nombre}}">
         </mat-form-field>
         <mat-form-field class="col-md-12">
-            <input matInput formControlName="apellidos" placeholder="Apellidos" value="{{data.apellidos}}">
+            <input matInput formControlName="apellidos" readonly placeholder="Apellidos" value="{{dataDialog.apellidos}}">
         </mat-form-field>
         <mat-form-field class="col-md-12">
-            <input matInput formControlName="empresa" placeholder="Empresa" value="{{data.empresa}}">
+            <input matInput formControlName="empresa" readonly placeholder="Empresa" value="{{dataDialog.empresa}}">
         </mat-form-field>
         <mat-form-field class="col-md-12">
-            <input matInput formControlName="direccion" placeholder="Dirección" value="{{data.direccion}}">
+            <input matInput formControlName="direccion" readonly placeholder="Dirección" value="{{dataDialog.direccion}}">
         </mat-form-field>
         <mat-form-field class="col-md-12">
-            <input matInput formControlName="telefono" placeholder="Teléfono" value="{{data.telefono}}">
+            <input matInput formControlName="telefono" readonly placeholder="Teléfono" value="{{dataDialog.telefono}}">
         </mat-form-field>
         <mat-form-field class="col-md-12">
-            <input matInput formControlName="email" placeholder="Email" value="{{data.email}}">
+            <input matInput formControlName="email" readonly placeholder="Email" value="{{dataDialog.email}}">
         </mat-form-field>
     </mat-dialog-content>
     <mat-dialog-actions align="end">

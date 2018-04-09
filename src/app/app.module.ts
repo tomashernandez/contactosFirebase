@@ -27,8 +27,11 @@ import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/dat
 import {FirebaseListObservable } from 'angularfire2/database-deprecated';
 import { AppComponent } from './app.component';
 import { DetallesComponent } from './detalles/detalles.component';
-import { EditarComponent } from './editar/editar.component';
+
 import { DialogComponent } from './dialog/dialog.component';
+import { DialogEditarComponent } from './dialog-editar/dialog-editar.component';
+import { DialogEliminarComponent } from './dialog-eliminar/dialog-eliminar.component';
+import { DialogAgregarComponent } from './dialog-agregar/dialog-agregar.component';
 
 
 export const firebaseConfig= {
@@ -43,8 +46,10 @@ export const firebaseConfig= {
   declarations: [
     AppComponent,
     DetallesComponent,
-    EditarComponent,
-    DialogComponent
+    DialogComponent,
+    DialogEditarComponent,
+    DialogEliminarComponent,
+    DialogAgregarComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +73,6 @@ export const firebaseConfig= {
   ],
   providers: [ ContactosService ],
   bootstrap: [AppComponent],
-  entryComponents: [DialogComponent]
+  entryComponents: [DialogComponent,DialogEditarComponent,DialogEliminarComponent,DialogAgregarComponent]
 })
 export class AppModule { }

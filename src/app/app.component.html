@@ -4,13 +4,24 @@
     <span class="fill-remainig-space"></span>
     <span> Angular-Firebase</span>
 </mat-toolbar>
-<mat-card>
-    <mat-select class="col-md-2" placeholder="Ciudad" (change)="onSelect($event.value)">
-        <mat-option *ngFor="let ciudad of ciudades " [value]="ciudad">
-            {{ciudad}}
-        </mat-option>
-    </mat-select>
-</mat-card>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <button mat-raised-button color="primary" (click)="onAgregar()" style="margin-top:2em;">Agregar</button>
+        </div>
+        <div class="col">
+            <mat-card>
+                <mat-select class="col-md-2" placeholder="Ciudad" (change)="onSelect($event.value)">
+                    <mat-option *ngFor="let ciudad of ciudades " [value]="ciudad">
+                        {{ciudad}}
+                    </mat-option>
+                </mat-select>
+            </mat-card>
+        </div>
+    </div>
+</div>
+
+
 <mat-card>
     <table class="table table-striped table-hover">
         <thead class="thead-dark">
@@ -18,9 +29,7 @@
                 <th>#</th>
                 <th>Nombre</th>
                 <th>Apellidos</th>
-
                 <th>Dirección</th>
-
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -29,16 +38,15 @@
                 <td>{{i+1}}</td>
                 <td>{{contacto.nombre}}</td>
                 <td>{{contacto.apellidos}}</td>
-
                 <td>{{contacto.direccion}}</td>
-
                 <td>
                     <button mat-raised-button color="primary" (click)="onClick(contacto)">Detalles</button>
-                    <button mat-raised-button color="accent" (click)="onEditar(contacto)">Editar</button>
+                    <button mat-raised-button color="accent" (click)="onEditarDialog(contacto)">Editar</button>
+                    <button mat-raised-button mat-warn color="warn" (click)="onEliminarDialog(contacto)">Eliminar</button>
                 </td>
             </tr>
         </tbody>
     </table>
 </mat-card>
-<app-editar [contacto]="contactoEditar" (cerrar)="cerrarEdicion()"></app-editar>
+
 <!--app-detalles [contact]="contacto" (close)="closeDetalles()"></app-detalles-->

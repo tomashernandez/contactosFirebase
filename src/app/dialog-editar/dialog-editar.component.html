@@ -1,0 +1,27 @@
+<form [formGroup]="formEditar" (ngSubmit)="onGuardar()">
+    <h2 mat-dialog-title>Edicción de <strong>{{dataEditar.nombre+' '+dataEditar.apellidos}}</strong></h2>
+    <mat-dialog-content>
+        <mat-form-field class="col-md-12">
+            <input matInput formControlName="nombre" placeholder="Nombre" value="{{dataEditar.nombre}}">
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+            <input matInput formControlName="apellidos" placeholder="Apellidos" value="{{dataEditar.apellidos}}">
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+            <input matInput formControlName="empresa" placeholder="Empresa" value="{{dataEditar.empresa}}">
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+            <input matInput formControlName="direccion" placeholder="Dirección" value="{{dataEditar.direccion}}">
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+            <input matInput formControlName="telefono" placeholder="Teléfono" value="{{dataEditar.telefono}}">
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+            <input matInput formControlName="email" placeholder="Email" value="{{dataEditar.email}}">
+        </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button type="submit" mat-button mat-raised-button color="accent" (click)="onGuardar()">Guardar</button>
+        <button type="button" mat-button mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+    </mat-dialog-actions>
+</form>

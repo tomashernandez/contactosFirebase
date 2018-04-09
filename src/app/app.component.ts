@@ -6,6 +6,9 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { MatDialog,MatDialogRef } from  '@angular/material';
 import { DialogComponent }  from  './dialog/dialog.component';
+import { DialogEditarComponent } from './dialog-editar/dialog-editar.component';
+import { DialogEliminarComponent } from './dialog-eliminar/dialog-eliminar.component';
+import { DialogAgregarComponent } from './dialog-agregar/dialog-agregar.component';
 
 
 
@@ -24,28 +27,28 @@ export class AppComponent implements OnInit {
   private contactsSubscription: Subscription = null;
   private filtroSubscription: Subscription = null;
   dialogRef:MatDialogRef<DialogComponent>;
-  contactoEditar=null;
+  dialogRefEditar:MatDialogRef<DialogEditarComponent>;
+  dialogRefEliminar:MatDialogRef<DialogEliminarComponent>;
+  dialogRefAgregar:MatDialogRef<DialogAgregarComponent>;
+  contactOrigin:any;
 
   constructor(private _contactos:ContactosService,private _dialog:MatDialog){}
 
   ngOnInit(){
-   this.contactsSubscription= this._contactos.getContacts()
-    .subscribe(contactos=>this.contactos=contactos);
+    this.listadoContactos();
     this.ciudades=this._contactos.getCitiesFilter();
+
   }
 
   onSelect(direccion: string|null){
     let query=null;
     if(direccion=='Todas'){
-      query=this._contactos.getContacts();
-      query.subscribe(contactos=>{
-        this.contactos=contactos;
-      });
+      this.listadoContactos();
+    
     }else{
       this.filtrados=this._contactos.getContactFilter2(direccion);
       this.filtroSubscription=this.filtrados.subscribe(queriedItems => {
           this.contactos=queriedItems; 
-          console.log(this.contactos);
       });
     }
     this.contacto=null;
@@ -69,19 +72,40 @@ export class AppComponent implements OnInit {
   //  
   }
 
+  listadoContactos(){
+   return this._contactos.getContacts().snapshotChanges()
+    .map(changes=>{
+      return changes.map(c  =>  ({key:  c.payload.key, ...c.payload.val()}))
+   }).subscribe(contactos=>this.contactos=contactos);
+  }
+
   closeDetalles(){
     this.contacto=null;
     this.dialogRef.close();
   }
 
-  onEditar(contacto){
-    this.contactoEditar=contacto;
-    console.log(this.contactoEditar);
+  onEditarDialog(contacto){
+    contacto.contactOrigin=contacto.key;
+    this.dialogRefEditar=this._dialog.open(DialogEditarComponent,{
+      width:'400px',
+      disableClose:true,
+      data: contacto
+    });
   }
 
-  cerrarEdicion(){
-      this.contactoEditar=null;
+  onEliminarDialog(contacto){
+    this.dialogRefEliminar=this._dialog.open(DialogEliminarComponent,{
+      width:'400px',
+      disableClose:true,
+      data: contacto
+    });
   }
 
+  onAgregar(){
+    this.dialogRefAgregar=this._dialog.open(DialogAgregarComponent,{
+      width:'400px',
+      disableClose:true
+    })
+  }
 
 }
