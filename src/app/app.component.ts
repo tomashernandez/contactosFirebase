@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
   contactsRef: AngularFireList<any>;
   ciudades:any[];
   filtrados: Observable<any[]>;
+  citiesObservable:Observable<any[]>;
   private contactsSubscription: Subscription = null;
   private filtroSubscription: Subscription = null;
   dialogRef:MatDialogRef<DialogComponent>;
@@ -31,13 +32,17 @@ export class AppComponent implements OnInit {
   dialogRefEliminar:MatDialogRef<DialogEliminarComponent>;
   dialogRefAgregar:MatDialogRef<DialogAgregarComponent>;
   contactOrigin:any;
+  cities:any[];
 
   constructor(private _contactos:ContactosService,private _dialog:MatDialog){}
 
   ngOnInit(){
     this.listadoContactos();
-    this.ciudades=this._contactos.getCitiesFilter();
+    this.ciudades=this.citiesFilter();
+  }
 
+  receiveMessage($event) {
+    this.ciudades = $event
   }
 
   onSelect(direccion: string|null){
@@ -65,11 +70,7 @@ export class AppComponent implements OnInit {
       width:'400px',
       disableClose:true,
       data: contacto
-    });
-    this.dialogRef
-    .afterClosed()
-    .subscribe(name => console.log(name));
-  //  
+    });  
   }
 
   listadoContactos(){
@@ -77,6 +78,20 @@ export class AppComponent implements OnInit {
     .map(changes=>{
       return changes.map(c  =>  ({key:  c.payload.key, ...c.payload.val()}))
    }).subscribe(contactos=>this.contactos=contactos);
+  }
+
+  citiesFilter(){
+    this.citiesObservable=this._contactos.getCities();
+    this.cities=['Todas'];
+    this.citiesObservable.subscribe(
+      x =>{     
+        x.forEach(element => {
+          if(!this.cities.includes(element.direccion))
+            this.cities.push(element.direccion);
+        });        
+      }   
+    );
+    return this.cities;
   }
 
   closeDetalles(){
@@ -98,6 +113,10 @@ export class AppComponent implements OnInit {
       width:'400px',
       disableClose:true,
       data: contacto
+    });
+
+    this.dialogRefEliminar.afterClosed().subscribe(response => {
+      this.ciudades=response.ciudades;
     });
   }
 

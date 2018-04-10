@@ -50,6 +50,12 @@ export class ContactosService {
     return this.cities;
   }
 
+  getCities(){
+    var obj = {};
+    this.contacts = this.afDb.list('/contactos').valueChanges();
+    return this.contacts;
+  }
+
   getContactFilter2(filtro:string){
     this.size$=new BehaviorSubject(null);
     const queryObservable = this.size$.switchMap(direccion =>

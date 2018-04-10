@@ -1,7 +1,8 @@
 
-import { Component, OnInit,Inject,Input } from '@angular/core';
+import { Component, OnInit,Output,Inject,Input,EventEmitter } from '@angular/core';
 import { MatDialogRef,MAT_DIALOG_DATA } from  '@angular/material';
 import { ContactosService } from '../services/contactos.service';
+import { Observable } from 'rxjs/Observable';
 @Component({
   templateUrl: './dialog-eliminar.component.html',
 })
@@ -9,6 +10,9 @@ export class DialogEliminarComponent implements OnInit {
   public title: string;
   public message: string;
   contactoKey:any;
+  auxCiudades: any[];
+  contactos: any[];
+ citiesObservable:Observable<any>;
   constructor(
     private dialogRef:MatDialogRef<DialogEliminarComponent>,
     private _contacts:ContactosService,
@@ -21,9 +25,27 @@ export class DialogEliminarComponent implements OnInit {
     this.message='¿Está seguro de realizar la acción?';
   }
   onEliminar(){
+    var ciudadesResult:any[];
     this._contacts.removeContact(this.contactoKey);
     this.contactoKey=null;
-    this.dialogRef.close();
+    ciudadesResult=this.citiesFilter();
+    this.dialogRef.close({ ciudades: ciudadesResult });
+  }
+
+
+
+  citiesFilter(){
+    this.citiesObservable= this._contacts.getCities();
+    this.auxCiudades=['Todas'];
+    this.citiesObservable.subscribe(
+      x =>{     
+        x.forEach(element => {
+          if(!this.auxCiudades.includes(element.direccion))
+            this.auxCiudades.push(element.direccion);
+        });        
+      }   
+    );
+    return this.auxCiudades
   }
 
 }
